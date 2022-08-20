@@ -23,6 +23,21 @@ int create_graph_rcpp(int nvertices, IntegerVector src, IntegerVector dst) {
 }
 
 // [[Rcpp::export]]
+int create_graphw_rcpp(int nvertices, IntegerVector src, IntegerVector dst,
+    NumericVector weights) {
+  Graph* graph = new Graph(nvertices);
+  int prev_src = 0;
+  for (int i = 0; i < src.size(); ++i) {
+    if (src[i] < prev_src) throw Rcpp::exception("Edges are out of order");
+    graph->add_edge(src[i], dst[i], weights[i], false);
+    prev_src = src[i];
+  }
+  graph->update_positions();
+  graphs.push_back(graph);
+  return graphs.size() - 1L;
+}
+
+// [[Rcpp::export]]
 void free_graph_rcpp(int graphid) {
   Graph* graph = graphs.at(graphid);
   if (graph != 0) delete graph;

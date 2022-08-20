@@ -5,6 +5,10 @@ create_graph_rcpp <- function(nvertices, src, dst) {
     .Call('_fastnetworklib_create_graph_rcpp', PACKAGE = 'fastnetworklib', nvertices, src, dst)
 }
 
+create_graphw_rcpp <- function(nvertices, src, dst, weights) {
+    .Call('_fastnetworklib_create_graphw_rcpp', PACKAGE = 'fastnetworklib', nvertices, src, dst, weights)
+}
+
 free_graph_rcpp <- function(graphid) {
     invisible(.Call('_fastnetworklib_free_graph_rcpp', PACKAGE = 'fastnetworklib', graphid))
 }

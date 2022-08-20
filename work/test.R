@@ -12,6 +12,7 @@ edges <- data.frame(
 g <- create_graph(seq_len(nvert)-1L, edges$src, edges$dst)
 
 a <- connected_components(g)
+a
 
 free_graph(g)
 
