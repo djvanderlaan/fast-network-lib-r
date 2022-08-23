@@ -41,3 +41,4 @@ create_graph <- function(vertex_ids, src, dst, weights = NULL) {
   }
   structure(res, class = "graph")
 }
+

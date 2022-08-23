@@ -17,6 +17,10 @@ free_all_graphs_rcpp <- function() {
     invisible(.Call('_fastnetworklib_free_all_graphs_rcpp', PACKAGE = 'fastnetworklib'))
 }
 
+stats_rcpp <- function(graphid) {
+    .Call('_fastnetworklib_stats_rcpp', PACKAGE = 'fastnetworklib', graphid)
+}
+
 connected_components_rcpp <- function(graphid) {
     .Call('_fastnetworklib_connected_components_rcpp', PACKAGE = 'fastnetworklib', graphid)
 }

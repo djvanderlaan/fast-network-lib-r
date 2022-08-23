@@ -46,11 +46,22 @@ void free_graph_rcpp(int graphid) {
 
 // [[Rcpp::export]]
 void free_all_graphs_rcpp() {
-  for (Graph* g: graphs) {
-    delete g;
-    g = 0;
+  for (size_t i = 0; i < graphs.size(); ++i) {
+    delete graphs[i];
+    graphs[i] = 0;
   }
 }
+
+// [[Rcpp::export]]
+IntegerVector stats_rcpp(int graphid) {
+  Graph* graph = graphs.at(graphid);
+  if (graph == 0) return 0;
+  return IntegerVector::create(
+    Named("nvertices") = graph->nvertices,
+    Named("nedges") = graph->edges.size()
+  );
+}
+
 
 // [[Rcpp::export]]
 IntegerVector connected_components_rcpp(int graphid) {
