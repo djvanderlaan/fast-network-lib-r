@@ -16,6 +16,12 @@ a
 
 free_graph(g)
 
+nvert <- 10
+edges <- data.frame(
+    src = integer(0),
+    dst = integer(0)
+  )
+
 
 b <- reclin2:::equivalence(seq_len(nvert)-1L, edges$src, edges$dst)
 
