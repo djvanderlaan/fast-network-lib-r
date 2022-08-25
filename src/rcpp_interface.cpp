@@ -4,6 +4,7 @@ using namespace Rcpp;
 
 #include "graph.h"
 #include "connected_components.h"
+#include "generate_poisson.h"
 
 // Store with graphs
 std::vector<Graph*> graphs;
@@ -102,4 +103,10 @@ DataFrame get_edgelist_rcpp(int graphid) {
   );
 }
 
+// [[Rcpp::export]]
+int generate_poisson_rcpp(int nvertices, double mean_degree, int seed) {
+  Graph* graph = new Graph(generate_poisson(nvertices, mean_degree, seed));
+  graphs.push_back(graph);
+  return graphs.size() - 1L;
+}
 

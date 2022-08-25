@@ -29,3 +29,7 @@ get_edgelist_rcpp <- function(graphid) {
     .Call('_fastnetworklib_get_edgelist_rcpp', PACKAGE = 'fastnetworklib', graphid)
 }
 
+generate_poisson_rcpp <- function(nvertices, mean_degree, seed) {
+    .Call('_fastnetworklib_generate_poisson_rcpp', PACKAGE = 'fastnetworklib', nvertices, mean_degree, seed)
+}
+

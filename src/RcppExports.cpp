@@ -89,6 +89,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// generate_poisson_rcpp
+int generate_poisson_rcpp(int nvertices, double mean_degree, int seed);
+RcppExport SEXP _fastnetworklib_generate_poisson_rcpp(SEXP nverticesSEXP, SEXP mean_degreeSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type nvertices(nverticesSEXP);
+    Rcpp::traits::input_parameter< double >::type mean_degree(mean_degreeSEXP);
+    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(generate_poisson_rcpp(nvertices, mean_degree, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_create_graph_rcpp", (DL_FUNC) &_fastnetworklib_create_graph_rcpp, 3},
@@ -98,6 +111,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_stats_rcpp", (DL_FUNC) &_fastnetworklib_stats_rcpp, 1},
     {"_fastnetworklib_connected_components_rcpp", (DL_FUNC) &_fastnetworklib_connected_components_rcpp, 1},
     {"_fastnetworklib_get_edgelist_rcpp", (DL_FUNC) &_fastnetworklib_get_edgelist_rcpp, 1},
+    {"_fastnetworklib_generate_poisson_rcpp", (DL_FUNC) &_fastnetworklib_generate_poisson_rcpp, 3},
     {NULL, NULL, 0}
 };
 
