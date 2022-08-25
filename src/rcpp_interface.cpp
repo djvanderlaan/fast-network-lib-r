@@ -75,20 +75,31 @@ IntegerVector connected_components_rcpp(int graphid) {
 }
 
 // [[Rcpp::export]]
-IntegerVector get_edgelist_rcpp(int graphid) {
+DataFrame get_edgelist_rcpp(int graphid) {
   Graph* graph = graphs.at(graphid);
   if (graph == 0) throw exception("Graph has been freed.");
   IntegerVector dst(graph->edges.size());
+  IntegerVector src(graph->edges.size());
+  NumericVector weights(graph->edges.size());
 
   auto p = graph->edges.cbegin();
+  auto pw = graph->weights.cbegin();
   auto p_dst = dst.begin();
+  auto p_weights = weights.begin();
+  auto p_src = src.begin();
   for (vid_t i = 0; i < graph->nvertices; ++i) {
     const degree_t k = graph->degrees[i];
-    for (degree_t j = 0; j < k; ++j, p++, p_dst++) {
+    for (degree_t j = 0; j < k; ++j, p++, p_dst++, p_src++, p_weights++) {
       (*p_dst) = *p;
+      (*p_src) = i;
+      (*p_weights) = *pw;
     }
   }
-  return dst;
+  return DataFrame::create(
+    Named("src") = src + 1L,
+    Named("dst") = dst + 1L,
+    Named("weights") = weights
+  );
 }
 
 

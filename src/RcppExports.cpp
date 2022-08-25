@@ -79,7 +79,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // get_edgelist_rcpp
-IntegerVector get_edgelist_rcpp(int graphid);
+DataFrame get_edgelist_rcpp(int graphid);
 RcppExport SEXP _fastnetworklib_get_edgelist_rcpp(SEXP graphidSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
