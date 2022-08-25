@@ -78,6 +78,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// get_edgelist_rcpp
+IntegerVector get_edgelist_rcpp(int graphid);
+RcppExport SEXP _fastnetworklib_get_edgelist_rcpp(SEXP graphidSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type graphid(graphidSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_edgelist_rcpp(graphid));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_create_graph_rcpp", (DL_FUNC) &_fastnetworklib_create_graph_rcpp, 3},
@@ -86,6 +97,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_free_all_graphs_rcpp", (DL_FUNC) &_fastnetworklib_free_all_graphs_rcpp, 0},
     {"_fastnetworklib_stats_rcpp", (DL_FUNC) &_fastnetworklib_stats_rcpp, 1},
     {"_fastnetworklib_connected_components_rcpp", (DL_FUNC) &_fastnetworklib_connected_components_rcpp, 1},
+    {"_fastnetworklib_get_edgelist_rcpp", (DL_FUNC) &_fastnetworklib_get_edgelist_rcpp, 1},
     {NULL, NULL, 0}
 };
 

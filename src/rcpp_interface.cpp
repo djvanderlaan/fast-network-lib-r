@@ -74,3 +74,21 @@ IntegerVector connected_components_rcpp(int graphid) {
   return res;
 }
 
+// [[Rcpp::export]]
+IntegerVector get_edgelist_rcpp(int graphid) {
+  Graph* graph = graphs.at(graphid);
+  if (graph == 0) throw exception("Graph has been freed.");
+  IntegerVector dst(graph->edges.size());
+
+  auto p = graph->edges.cbegin();
+  auto p_dst = dst.begin();
+  for (vid_t i = 0; i < graph->nvertices; ++i) {
+    const degree_t k = graph->degrees[i];
+    for (degree_t j = 0; j < k; ++j, p++, p_dst++) {
+      (*p_dst) = *p;
+    }
+  }
+  return dst;
+}
+
+

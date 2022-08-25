@@ -25,3 +25,7 @@ connected_components_rcpp <- function(graphid) {
     .Call('_fastnetworklib_connected_components_rcpp', PACKAGE = 'fastnetworklib', graphid)
 }
 
+get_edgelist_rcpp <- function(graphid) {
+    .Call('_fastnetworklib_get_edgelist_rcpp', PACKAGE = 'fastnetworklib', graphid)
+}
+
