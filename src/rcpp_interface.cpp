@@ -5,6 +5,9 @@ using namespace Rcpp;
 #include "graph.h"
 #include "connected_components.h"
 #include "generate_poisson.h"
+#include "localised_random_walk.h"
+#include "normalise_weights.h"
+
 
 // Store with graphs
 std::vector<Graph*> graphs;
@@ -109,4 +112,21 @@ int generate_poisson_rcpp(int nvertices, double mean_degree, int seed) {
   graphs.push_back(graph);
   return graphs.size() - 1L;
 }
+
+// [[Rcpp::export]]
+NumericVector localised_random_walk_rcpp(int graphid, std::vector<double> values, 
+    std::vector<double> weights, double alpha, int nstep_max, double precision, 
+    int nthreads) {
+  Graph* graph = graphs.at(graphid);
+  if (graph == 0) throw exception("Graph has been freed.");
+  normalise_weights(*graph);
+  unsigned int nstep = 0;
+  std::vector<double> res = localised_random_walk(*graph, values, weights, alpha, nstep_max, precision, 
+      nthreads, &nstep);
+  NumericVector rres = wrap(res);
+  rres.attr("nstep") = nstep;
+  return rres;
+}
+
+
 

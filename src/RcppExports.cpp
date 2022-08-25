@@ -102,6 +102,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// localised_random_walk_rcpp
+NumericVector localised_random_walk_rcpp(int graphid, std::vector<double> values, std::vector<double> weights, double alpha, int nstep_max, double precision, int nthreads);
+RcppExport SEXP _fastnetworklib_localised_random_walk_rcpp(SEXP graphidSEXP, SEXP valuesSEXP, SEXP weightsSEXP, SEXP alphaSEXP, SEXP nstep_maxSEXP, SEXP precisionSEXP, SEXP nthreadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type graphid(graphidSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< int >::type nstep_max(nstep_maxSEXP);
+    Rcpp::traits::input_parameter< double >::type precision(precisionSEXP);
+    Rcpp::traits::input_parameter< int >::type nthreads(nthreadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(localised_random_walk_rcpp(graphid, values, weights, alpha, nstep_max, precision, nthreads));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_create_graph_rcpp", (DL_FUNC) &_fastnetworklib_create_graph_rcpp, 3},
@@ -112,6 +129,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_connected_components_rcpp", (DL_FUNC) &_fastnetworklib_connected_components_rcpp, 1},
     {"_fastnetworklib_get_edgelist_rcpp", (DL_FUNC) &_fastnetworklib_get_edgelist_rcpp, 1},
     {"_fastnetworklib_generate_poisson_rcpp", (DL_FUNC) &_fastnetworklib_generate_poisson_rcpp, 3},
+    {"_fastnetworklib_localised_random_walk_rcpp", (DL_FUNC) &_fastnetworklib_localised_random_walk_rcpp, 7},
     {NULL, NULL, 0}
 };
 
