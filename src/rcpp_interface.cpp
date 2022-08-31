@@ -14,7 +14,7 @@ std::vector<Graph*> graphs;
 
 // [[Rcpp::export]]
 int create_graph_rcpp(int nvertices, IntegerVector src, IntegerVector dst) {
-  Graph* graph = new Graph(nvertices);
+  Graph* graph = new Graph(nvertices, src.size());
   int prev_src = 0;
   for (int i = 0; i < src.size(); ++i) {
     if (src[i] < prev_src) throw Rcpp::exception("Edges are out of order");
