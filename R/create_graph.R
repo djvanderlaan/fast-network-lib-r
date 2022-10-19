@@ -36,9 +36,11 @@ create_graph <- function(vertex_ids, src, dst, weights = NULL, ordered = FALSE) 
     o <- order(src)
     src <- src[o]
     dst <- dst[o]
+    if (!missing(weights)) {
+      weights <- weights[o]
+    }
   }
   if (!missing(weights)) {
-    weights <- weights[o]
     res <- create_graphw_rcpp(length(vertex_ids), src, dst, weights)
   } else {
     res <- create_graph_rcpp(length(vertex_ids), src, dst)
