@@ -7,6 +7,8 @@
 #'   in \code{vertex_ids}. Should have the same length as \code{src}.
 #' @param weights optional vector with the weights of the edges. When omitted als edges
 #'   get a weight of 1.0. Should have the same length as \code{src} (or \code{NULL}).
+#' @param ordered logical indicating whether or not the edges are ordered. Passing
+#'   \code{TRUE} when the edges are ordered can speed up creation of the graph.
 #'
 #' @details
 #' Graphs are always considered to be directed weighted graphs.
@@ -21,7 +23,7 @@
 #' @import Rcpp
 #' @importFrom Rcpp evalCpp
 #' @export
-create_graph <- function(vertex_ids, src, dst, weights = NULL) {
+create_graph <- function(vertex_ids, src, dst, weights = NULL, ordered = FALSE) {
   stopifnot(!anyDuplicated(vertex_ids))
   stopifnot(length(src) == length(dst))
   stopifnot(missing(weights) || length(weights) == length(src))
@@ -30,9 +32,11 @@ create_graph <- function(vertex_ids, src, dst, weights = NULL) {
   stopifnot(!anyNA(src))
   stopifnot(!anyNA(dst))
   stopifnot(missing(weights) || !anyNA(weights))
-  o <- order(src)
-  src <- src[o]
-  dst <- dst[o]
+  if (!ordered) {
+    o <- order(src)
+    src <- src[o]
+    dst <- dst[o]
+  }
   if (!missing(weights)) {
     weights <- weights[o]
     res <- create_graphw_rcpp(length(vertex_ids), src, dst, weights)
