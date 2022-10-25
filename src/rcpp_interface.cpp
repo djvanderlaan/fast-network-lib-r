@@ -7,6 +7,7 @@ using namespace Rcpp;
 #include "generate_poisson.h"
 #include "localised_random_walk.h"
 #include "normalise_weights.h"
+#include "pajek.h"
 
 
 // Store with graphs
@@ -128,5 +129,18 @@ NumericVector localised_random_walk_rcpp(int graphid, std::vector<double> values
   return rres;
 }
 
+// [[Rcpp::export]]
+void write_pajek_rcpp(int graphid, const std::string& filename) {
+  Graph* graph = graphs.at(graphid);
+  if (graph == 0) throw exception("Graph has been freed.");
+  write_pajek(*graph, filename);
+}
+
+// [[Rcpp::export]]
+int read_pajek_rcpp(const std::string& filename) {
+  Graph* graph = new Graph{read_pajek(filename)};
+  graphs.push_back(graph);
+  return graphs.size() - 1L;
+}
 
 

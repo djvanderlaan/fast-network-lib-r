@@ -37,3 +37,11 @@ localised_random_walk_rcpp <- function(graphid, values, weights, alpha, nstep_ma
     .Call('_fastnetworklib_localised_random_walk_rcpp', PACKAGE = 'fastnetworklib', graphid, values, weights, alpha, nstep_max, precision, nthreads)
 }
 
+write_pajek_rcpp <- function(graphid, filename) {
+    invisible(.Call('_fastnetworklib_write_pajek_rcpp', PACKAGE = 'fastnetworklib', graphid, filename))
+}
+
+read_pajek_rcpp <- function(filename) {
+    .Call('_fastnetworklib_read_pajek_rcpp', PACKAGE = 'fastnetworklib', filename)
+}
+
