@@ -65,3 +65,20 @@ expect_equal(stats, list())
 stats <- graph_stats(g2)
 expect_equal(stats, list())
 
+
+# Test ordered option
+nvert <- 10
+edges <- data.frame(
+    src = c(1,2,1,4,6,7,6),
+    dst = c(2,3,2,1,8,8,9)
+  )
+expect_error(
+  g <- create_graph(seq_len(nvert)-1L, edges$src, edges$dst, ordered = TRUE)
+)
+edges <- edges[order(edges$src),]
+g <- create_graph(seq_len(nvert)-1L, edges$src, edges$dst, ordered = TRUE)
+res <- get_edgelist(g)
+free_graph(g)
+expect_equal(res[[1]], edges[[1]]+1L)
+expect_equal(res[[2]], edges[[2]]+1L)
+
