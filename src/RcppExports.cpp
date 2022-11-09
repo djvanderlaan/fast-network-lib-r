@@ -103,8 +103,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // localised_random_walk_rcpp
-NumericVector localised_random_walk_rcpp(int graphid, std::vector<double> values, std::vector<double> weights, double alpha, int nstep_max, double precision, int nthreads);
-RcppExport SEXP _fastnetworklib_localised_random_walk_rcpp(SEXP graphidSEXP, SEXP valuesSEXP, SEXP weightsSEXP, SEXP alphaSEXP, SEXP nstep_maxSEXP, SEXP precisionSEXP, SEXP nthreadsSEXP) {
+NumericVector localised_random_walk_rcpp(int graphid, std::vector<double> values, std::vector<double> weights, double alpha, int nstep_max, double precision, int nthreads, bool normalise);
+RcppExport SEXP _fastnetworklib_localised_random_walk_rcpp(SEXP graphidSEXP, SEXP valuesSEXP, SEXP weightsSEXP, SEXP alphaSEXP, SEXP nstep_maxSEXP, SEXP precisionSEXP, SEXP nthreadsSEXP, SEXP normaliseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -115,7 +115,30 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type nstep_max(nstep_maxSEXP);
     Rcpp::traits::input_parameter< double >::type precision(precisionSEXP);
     Rcpp::traits::input_parameter< int >::type nthreads(nthreadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(localised_random_walk_rcpp(graphid, values, weights, alpha, nstep_max, precision, nthreads));
+    Rcpp::traits::input_parameter< bool >::type normalise(normaliseSEXP);
+    rcpp_result_gen = Rcpp::wrap(localised_random_walk_rcpp(graphid, values, weights, alpha, nstep_max, precision, nthreads, normalise));
+    return rcpp_result_gen;
+END_RCPP
+}
+// write_pajek_rcpp
+void write_pajek_rcpp(int graphid, const std::string& filename);
+RcppExport SEXP _fastnetworklib_write_pajek_rcpp(SEXP graphidSEXP, SEXP filenameSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type graphid(graphidSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type filename(filenameSEXP);
+    write_pajek_rcpp(graphid, filename);
+    return R_NilValue;
+END_RCPP
+}
+// read_pajek_rcpp
+int read_pajek_rcpp(const std::string& filename);
+RcppExport SEXP _fastnetworklib_read_pajek_rcpp(SEXP filenameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type filename(filenameSEXP);
+    rcpp_result_gen = Rcpp::wrap(read_pajek_rcpp(filename));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -129,7 +152,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_connected_components_rcpp", (DL_FUNC) &_fastnetworklib_connected_components_rcpp, 1},
     {"_fastnetworklib_get_edgelist_rcpp", (DL_FUNC) &_fastnetworklib_get_edgelist_rcpp, 1},
     {"_fastnetworklib_generate_poisson_rcpp", (DL_FUNC) &_fastnetworklib_generate_poisson_rcpp, 3},
-    {"_fastnetworklib_localised_random_walk_rcpp", (DL_FUNC) &_fastnetworklib_localised_random_walk_rcpp, 7},
+    {"_fastnetworklib_localised_random_walk_rcpp", (DL_FUNC) &_fastnetworklib_localised_random_walk_rcpp, 8},
+    {"_fastnetworklib_write_pajek_rcpp", (DL_FUNC) &_fastnetworklib_write_pajek_rcpp, 2},
+    {"_fastnetworklib_read_pajek_rcpp", (DL_FUNC) &_fastnetworklib_read_pajek_rcpp, 1},
     {NULL, NULL, 0}
 };
 

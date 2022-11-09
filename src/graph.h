@@ -12,7 +12,12 @@ typedef float weight_t;
 class Graph {
   public:
     Graph(vid_t nvertices = 0, size_t nedges = 0) : nvertices(nvertices), 
-      degrees(nvertices), positions(nvertices), edges(nedges), weights(nedges) {
+        degrees(nvertices), positions(nvertices), edges(), weights() {
+      if (nedges > 0) {
+        edges.reserve(nedges);
+        weights.reserve(nedges);
+      }
+
     };
 
     void add_vertex(vid_t id, bool update_pos = true) {

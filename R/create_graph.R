@@ -7,7 +7,7 @@
 #'   in \code{vertex_ids}. Should have the same length as \code{src}.
 #' @param weights optional vector with the weights of the edges. When omitted als edges
 #'   get a weight of 1.0. Should have the same length as \code{src} (or \code{NULL}).
-#' @param ordered logical indicating whether or not the edges are ordered. Passing
+#' @param ordered logical indicating whether or not the edges are ordered (by src). Passing
 #'   \code{TRUE} when the edges are ordered can speed up creation of the graph.
 #'
 #' @details

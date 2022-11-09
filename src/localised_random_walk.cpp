@@ -52,6 +52,7 @@ class localised_random_walk_computer {
     }
 
     bool computation_step(unsigned int nthreads) {
+      if (graph.nvertices == 0) return true;
       nthreads = std::min(graph.nvertices, nthreads);
       if (nthreads <= 1) return computation_step_range(0, graph.nvertices);
       auto chunks = chunk(graph.nvertices, nthreads);
