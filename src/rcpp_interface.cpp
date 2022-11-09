@@ -117,10 +117,10 @@ int generate_poisson_rcpp(int nvertices, double mean_degree, int seed) {
 // [[Rcpp::export]]
 NumericVector localised_random_walk_rcpp(int graphid, std::vector<double> values, 
     std::vector<double> weights, double alpha, int nstep_max, double precision, 
-    int nthreads) {
+    int nthreads, bool normalise) {
   Graph* graph = graphs.at(graphid);
   if (graph == 0) throw exception("Graph has been freed.");
-  normalise_weights(*graph);
+  if (normalise) normalise_weights(*graph);
   unsigned int nstep = 0;
   std::vector<double> res = localised_random_walk(*graph, values, weights, alpha, nstep_max, precision, 
       nthreads, &nstep);

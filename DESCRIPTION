@@ -1,7 +1,7 @@
 Package: fastnetworklib
 Type: Package
 Title: Fast Network Lib
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     person(given = "Jan",
            family = "van der Laan",

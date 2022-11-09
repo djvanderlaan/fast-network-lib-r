@@ -33,8 +33,8 @@ generate_poisson_rcpp <- function(nvertices, mean_degree, seed) {
     .Call('_fastnetworklib_generate_poisson_rcpp', PACKAGE = 'fastnetworklib', nvertices, mean_degree, seed)
 }
 
-localised_random_walk_rcpp <- function(graphid, values, weights, alpha, nstep_max, precision, nthreads) {
-    .Call('_fastnetworklib_localised_random_walk_rcpp', PACKAGE = 'fastnetworklib', graphid, values, weights, alpha, nstep_max, precision, nthreads)
+localised_random_walk_rcpp <- function(graphid, values, weights, alpha, nstep_max, precision, nthreads, normalise) {
+    .Call('_fastnetworklib_localised_random_walk_rcpp', PACKAGE = 'fastnetworklib', graphid, values, weights, alpha, nstep_max, precision, nthreads, normalise)
 }
 
 write_pajek_rcpp <- function(graphid, filename) {
