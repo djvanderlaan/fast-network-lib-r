@@ -17,7 +17,7 @@ std::vector<Graph*> graphs;
 int create_graph_rcpp(int nvertices, IntegerVector src, IntegerVector dst) {
   Graph* graph = new Graph(nvertices, src.size());
   int prev_src = 0;
-  for (int i = 0; i < src.size(); ++i) {
+  for (R_xlen_t i = 0; i < src.size(); ++i) {
     if (src[i] < prev_src) throw Rcpp::exception("Edges are out of order");
     graph->add_edge(src[i], dst[i], 1.0, false);
     prev_src = src[i];
@@ -32,7 +32,7 @@ int create_graphw_rcpp(int nvertices, IntegerVector src, IntegerVector dst,
     NumericVector weights) {
   Graph* graph = new Graph(nvertices);
   int prev_src = 0;
-  for (int i = 0; i < src.size(); ++i) {
+  for (R_xlen_t i = 0; i < src.size(); ++i) {
     if (src[i] < prev_src) throw Rcpp::exception("Edges are out of order");
     graph->add_edge(src[i], dst[i], weights[i], false);
     prev_src = src[i];
@@ -58,10 +58,10 @@ void free_all_graphs_rcpp() {
 }
 
 // [[Rcpp::export]]
-IntegerVector stats_rcpp(int graphid) {
+NumericVector stats_rcpp(int graphid) {
   Graph* graph = graphs.at(graphid);
   if (graph == 0) return 0;
-  return IntegerVector::create(
+  return NumericVector::create(
     Named("nvertices") = graph->nvertices,
     Named("nedges") = graph->edges.size()
   );
@@ -74,7 +74,7 @@ IntegerVector connected_components_rcpp(int graphid) {
   if (graph == 0) throw exception("Graph has been freed.");
   std::vector<vid_t> comp = connected_components(*graph);
   IntegerVector res(comp.size());
-  for (unsigned int i = 0; i < comp.size(); ++i)
+  for (size_t i = 0; i < comp.size(); ++i)
     res[i] = comp[i];
   return res;
 }

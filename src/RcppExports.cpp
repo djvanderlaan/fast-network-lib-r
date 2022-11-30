@@ -57,7 +57,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // stats_rcpp
-IntegerVector stats_rcpp(int graphid);
+NumericVector stats_rcpp(int graphid);
 RcppExport SEXP _fastnetworklib_stats_rcpp(SEXP graphidSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
