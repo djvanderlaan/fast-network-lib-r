@@ -9,6 +9,14 @@ create_graphw_rcpp <- function(nvertices, src, dst, weights) {
     .Call('_fastnetworklib_create_graphw_rcpp', PACKAGE = 'fastnetworklib', nvertices, src, dst, weights)
 }
 
+add_edges_rcpp <- function(graphid, src, dst) {
+    .Call('_fastnetworklib_add_edges_rcpp', PACKAGE = 'fastnetworklib', graphid, src, dst)
+}
+
+add_edgesw_rcpp <- function(graphid, src, dst, weights) {
+    .Call('_fastnetworklib_add_edgesw_rcpp', PACKAGE = 'fastnetworklib', graphid, src, dst, weights)
+}
+
 free_graph_rcpp <- function(graphid) {
     invisible(.Call('_fastnetworklib_free_graph_rcpp', PACKAGE = 'fastnetworklib', graphid))
 }

@@ -43,6 +43,48 @@ int create_graphw_rcpp(int nvertices, IntegerVector src, IntegerVector dst,
 }
 
 // [[Rcpp::export]]
+int add_edges_rcpp(int graphid, IntegerVector src, IntegerVector dst) {
+  Graph* graph = graphs.at(graphid);
+  if (graph == 0) throw exception("Graph has been freed.");
+  // Determine the src id of last edge
+  int prev_src = 0;
+  for (unsigned int i = 0; i < graph->nvertices; ++i) {
+    const unsigned int k = graph->degrees[i];
+    if (k > 0) prev_src = i;
+  }
+  // Add edges
+  for (R_xlen_t i = 0; i < src.size(); ++i) {
+    if (src[i] < prev_src) throw Rcpp::exception("Edges are out of order");
+    graph->add_edge(src[i], dst[i], 1.0, false);
+    prev_src = src[i];
+  }
+  graph->update_positions();
+  return graphid;
+}
+
+// [[Rcpp::export]]
+int add_edgesw_rcpp(int graphid, IntegerVector src, IntegerVector dst, 
+    NumericVector weights) {
+  Graph* graph = graphs.at(graphid);
+  if (graph == 0) throw exception("Graph has been freed.");
+  // Determine the src id of last edge
+  int prev_src = 0;
+  for (unsigned int i = 0; i < graph->nvertices; ++i) {
+    const unsigned int k = graph->degrees[i];
+    if (k > 0) prev_src = i;
+  }
+  // Add edges
+  for (R_xlen_t i = 0; i < src.size(); ++i) {
+    if (src[i] < prev_src) throw Rcpp::exception("Edges are out of order");
+    graph->add_edge(src[i], dst[i], weights[i], false);
+    prev_src = src[i];
+  }
+  graph->update_positions();
+  return graphid;
+}
+
+
+// [[Rcpp::export]]
 void free_graph_rcpp(int graphid) {
   Graph* graph = graphs.at(graphid);
   if (graph != 0) delete graph;
@@ -94,7 +136,7 @@ DataFrame get_edgelist_rcpp(int graphid) {
   auto p_src = src.begin();
   for (vid_t i = 0; i < graph->nvertices; ++i) {
     const degree_t k = graph->degrees[i];
-    for (degree_t j = 0; j < k; ++j, p++, p_dst++, p_src++, p_weights++) {
+    for (degree_t j = 0; j < k; ++j, p++, pw++, p_dst++, p_src++, p_weights++) {
       (*p_dst) = *p;
       (*p_src) = i;
       (*p_weights) = *pw;

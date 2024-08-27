@@ -1,5 +1,7 @@
-#' Create a graph object
+
+#' Add edges to graph object
 #' 
+#' @param graph a \code{graph} object.
 #' @param vertex_ids a vector with the id's of the vertices of the graph.
 #' @param src vector with the source vertex id of the edges. Should be values present
 #'   in \code{vertex_ids}. 
@@ -7,23 +9,20 @@
 #'   in \code{vertex_ids}. Should have the same length as \code{src}.
 #' @param weights optional vector with the weights of the edges. When omitted als edges
 #'   get a weight of 1.0. Should have the same length as \code{src} (or \code{NULL}).
-#' @param ordered logical indicating whether or not the edges are ordered (by src). Passing
-#'   \code{TRUE} when the edges are ordered can speed up creation of the graph.
 #'
 #' @details
-#' Graphs are always considered to be directed weighted graphs.
+#' It is assumed that edges are added in order. If the edges of vertices 1 to 10
+#' are already added to the graph, \code{add_edges} will generate an error when
+#' an attempt is made to add edges of vertices 1 to 9. 
 #'
 #' @return
-#' Returns a graph object. This is an integer value indicating the internal id of the 
-#' graph in the fast-network-lib library. Make sure to delete the graph using 
-#' \code{\link{free_graph}} or \code{\link{free_all_graphs}} after use, to free up the 
-#' memory associated with the graph.
+#' Returns the graph object. 
 #'
 #' @useDynLib fastnetworklib
 #' @import Rcpp
 #' @importFrom Rcpp evalCpp
 #' @export
-create_graph <- function(vertex_ids, src, dst, weights = NULL, ordered = FALSE) {
+add_edges <- function(graph, vertex_ids, src, dst, weights = NULL) {
   stopifnot(!anyDuplicated(vertex_ids))
   stopifnot(length(src) == length(dst))
   stopifnot(is.null(weights) || length(weights) == length(src))
@@ -32,19 +31,11 @@ create_graph <- function(vertex_ids, src, dst, weights = NULL, ordered = FALSE) 
   stopifnot(!anyNA(src))
   stopifnot(!anyNA(dst))
   stopifnot(is.null(weights) || !anyNA(weights))
-  if (!ordered) {
-    o <- order(src)
-    src <- src[o]
-    dst <- dst[o]
-    if (!is.null(weights)) {
-      weights <- weights[o]
-    }
-  }
   if (!is.null(weights)) {
-    res <- create_graphw_rcpp(length(vertex_ids), src, dst, weights)
+    add_edgesw_rcpp(graph, src, dst, weights)
   } else {
-    res <- create_graph_rcpp(length(vertex_ids), src, dst)
+    add_edges_rcpp(graph, src, dst)
   }
-  structure(res, class = "graph")
+  invisible(graph)
 }
 

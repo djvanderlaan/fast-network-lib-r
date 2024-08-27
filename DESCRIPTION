@@ -1,7 +1,7 @@
 Package: fastnetworklib
 Type: Package
 Title: Fast Network Lib
-Version: 0.0.2
+Version: 0.1.0
 Authors@R: 
     person(given = "Jan",
            family = "van der Laan",
@@ -15,12 +15,9 @@ Depends:
     R (>= 3.6.0)
 Imports:
     Rcpp,
-Suggests:
-    simplermarkdown
 LinkingTo: Rcpp
-VignetteBuilder: simplermarkdown
 SystemRequirements: C++11
 License: GPL-3
 LazyLoad: yes
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.1

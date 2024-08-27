@@ -37,6 +37,33 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// add_edges_rcpp
+int add_edges_rcpp(int graphid, IntegerVector src, IntegerVector dst);
+RcppExport SEXP _fastnetworklib_add_edges_rcpp(SEXP graphidSEXP, SEXP srcSEXP, SEXP dstSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type graphid(graphidSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type src(srcSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dst(dstSEXP);
+    rcpp_result_gen = Rcpp::wrap(add_edges_rcpp(graphid, src, dst));
+    return rcpp_result_gen;
+END_RCPP
+}
+// add_edgesw_rcpp
+int add_edgesw_rcpp(int graphid, IntegerVector src, IntegerVector dst, NumericVector weights);
+RcppExport SEXP _fastnetworklib_add_edgesw_rcpp(SEXP graphidSEXP, SEXP srcSEXP, SEXP dstSEXP, SEXP weightsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type graphid(graphidSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type src(srcSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dst(dstSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(add_edgesw_rcpp(graphid, src, dst, weights));
+    return rcpp_result_gen;
+END_RCPP
+}
 // free_graph_rcpp
 void free_graph_rcpp(int graphid);
 RcppExport SEXP _fastnetworklib_free_graph_rcpp(SEXP graphidSEXP) {
@@ -146,6 +173,8 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_create_graph_rcpp", (DL_FUNC) &_fastnetworklib_create_graph_rcpp, 3},
     {"_fastnetworklib_create_graphw_rcpp", (DL_FUNC) &_fastnetworklib_create_graphw_rcpp, 4},
+    {"_fastnetworklib_add_edges_rcpp", (DL_FUNC) &_fastnetworklib_add_edges_rcpp, 3},
+    {"_fastnetworklib_add_edgesw_rcpp", (DL_FUNC) &_fastnetworklib_add_edgesw_rcpp, 4},
     {"_fastnetworklib_free_graph_rcpp", (DL_FUNC) &_fastnetworklib_free_graph_rcpp, 1},
     {"_fastnetworklib_free_all_graphs_rcpp", (DL_FUNC) &_fastnetworklib_free_all_graphs_rcpp, 0},
     {"_fastnetworklib_stats_rcpp", (DL_FUNC) &_fastnetworklib_stats_rcpp, 1},
