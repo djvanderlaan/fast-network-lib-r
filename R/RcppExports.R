@@ -17,6 +17,10 @@ add_edgesw_rcpp <- function(graphid, src, dst, weights) {
     .Call('_fastnetworklib_add_edgesw_rcpp', PACKAGE = 'fastnetworklib', graphid, src, dst, weights)
 }
 
+add_edgesl_rcpp <- function(graphid, src, dst, n_weights, n_layer) {
+    .Call('_fastnetworklib_add_edgesl_rcpp', PACKAGE = 'fastnetworklib', graphid, src, dst, n_weights, n_layer)
+}
+
 free_graph_rcpp <- function(graphid) {
     invisible(.Call('_fastnetworklib_free_graph_rcpp', PACKAGE = 'fastnetworklib', graphid))
 }

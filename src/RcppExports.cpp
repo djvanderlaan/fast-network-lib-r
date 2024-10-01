@@ -64,6 +64,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// add_edgesl_rcpp
+int add_edgesl_rcpp(int graphid, IntegerVector src, IntegerVector dst, Nullable<NumericVector> n_weights, Nullable<IntegerVector> n_layer);
+RcppExport SEXP _fastnetworklib_add_edgesl_rcpp(SEXP graphidSEXP, SEXP srcSEXP, SEXP dstSEXP, SEXP n_weightsSEXP, SEXP n_layerSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type graphid(graphidSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type src(srcSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dst(dstSEXP);
+    Rcpp::traits::input_parameter< Nullable<NumericVector> >::type n_weights(n_weightsSEXP);
+    Rcpp::traits::input_parameter< Nullable<IntegerVector> >::type n_layer(n_layerSEXP);
+    rcpp_result_gen = Rcpp::wrap(add_edgesl_rcpp(graphid, src, dst, n_weights, n_layer));
+    return rcpp_result_gen;
+END_RCPP
+}
 // free_graph_rcpp
 void free_graph_rcpp(int graphid);
 RcppExport SEXP _fastnetworklib_free_graph_rcpp(SEXP graphidSEXP) {
@@ -175,6 +190,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_create_graphw_rcpp", (DL_FUNC) &_fastnetworklib_create_graphw_rcpp, 4},
     {"_fastnetworklib_add_edges_rcpp", (DL_FUNC) &_fastnetworklib_add_edges_rcpp, 3},
     {"_fastnetworklib_add_edgesw_rcpp", (DL_FUNC) &_fastnetworklib_add_edgesw_rcpp, 4},
+    {"_fastnetworklib_add_edgesl_rcpp", (DL_FUNC) &_fastnetworklib_add_edgesl_rcpp, 5},
     {"_fastnetworklib_free_graph_rcpp", (DL_FUNC) &_fastnetworklib_free_graph_rcpp, 1},
     {"_fastnetworklib_free_all_graphs_rcpp", (DL_FUNC) &_fastnetworklib_free_all_graphs_rcpp, 0},
     {"_fastnetworklib_stats_rcpp", (DL_FUNC) &_fastnetworklib_stats_rcpp, 1},
