@@ -13,6 +13,11 @@
 // supplied graph object. If $S_i$ is the sum of the weights of vertex $i$ and
 // $w_ij$ the weight of edge, then the normalised weighs are $w'_ij = w_ij/S_i$. 
 //
+// The function `normalise_weights_by_layer` will ensure that each of the layers
+// has the same total weight and the total weights for one vertex will be equal
+// to one. 
+//
 void normalise_weights(Graph& graph);
+void normalise_weights_by_layer(Graph& graph);
 
 #endif
