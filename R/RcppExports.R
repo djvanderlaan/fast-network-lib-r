@@ -57,3 +57,7 @@ read_pajek_rcpp <- function(filename) {
     .Call('_fastnetworklib_read_pajek_rcpp', PACKAGE = 'fastnetworklib', filename)
 }
 
+decompose_exposure_rcpp <- function(graphid, values, exposure, weights, alpha) {
+    .Call('_fastnetworklib_decompose_exposure_rcpp', PACKAGE = 'fastnetworklib', graphid, values, exposure, weights, alpha)
+}
+

@@ -8,6 +8,7 @@ using namespace Rcpp;
 #include "localised_random_walk.h"
 #include "normalise_weights.h"
 #include "pajek.h"
+#include "decompose_exposure.h"
 
 
 // Store with graphs
@@ -253,4 +254,19 @@ int read_pajek_rcpp(const std::string& filename) {
   return graphs.size() - 1L;
 }
 
+// [[Rcpp::export]]
+List decompose_exposure_rcpp(int graphid, std::vector<double> values, 
+    std::vector<double> exposure, std::vector<double> weights,
+    double alpha) {
+  Graph* graph = graphs.at(graphid);
+  if (graph == 0) throw exception("Graph has been freed.");
+  const std::vector<DoubleVec> result = decompose_exposure(*graph, values, 
+      exposure, weights, alpha);
+  List res(result.size());
+  for (size_t i = 0; i < result.size(); ++i) {
+    NumericVector r = NumericVector::import(result[i].cbegin(), result[i].cend());;
+    res[i] = r;
+  }
+  return res;
+}
 

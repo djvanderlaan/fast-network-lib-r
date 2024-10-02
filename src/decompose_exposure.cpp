@@ -17,7 +17,7 @@ std::vector<DoubleVec> decompose_exposure(const Graph& graph,
   // Go over the the network
   for (vid_t v = 0; v < graph.nvertices; ++v) {
     const degree_t k = graph.degrees[v];
-    for (degree_t j = 0; j < k; ++p_dst, ++p_weights, ++p_layers) {
+    for (degree_t j = 0; j < k; ++j, ++p_dst, ++p_weights, ++p_layers) {
       const layer_t layer = *p_layers;
       if (layer < 1 || layer > graph.nlayers) std::runtime_error("Invalid layer");
       vid_t w = *p_dst;

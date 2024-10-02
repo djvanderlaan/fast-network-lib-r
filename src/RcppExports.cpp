@@ -184,6 +184,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// decompose_exposure_rcpp
+List decompose_exposure_rcpp(int graphid, std::vector<double> values, std::vector<double> exposure, std::vector<double> weights, double alpha);
+RcppExport SEXP _fastnetworklib_decompose_exposure_rcpp(SEXP graphidSEXP, SEXP valuesSEXP, SEXP exposureSEXP, SEXP weightsSEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type graphid(graphidSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type exposure(exposureSEXP);
+    Rcpp::traits::input_parameter< std::vector<double> >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(decompose_exposure_rcpp(graphid, values, exposure, weights, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_create_graph_rcpp", (DL_FUNC) &_fastnetworklib_create_graph_rcpp, 3},
@@ -200,6 +215,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_fastnetworklib_localised_random_walk_rcpp", (DL_FUNC) &_fastnetworklib_localised_random_walk_rcpp, 8},
     {"_fastnetworklib_write_pajek_rcpp", (DL_FUNC) &_fastnetworklib_write_pajek_rcpp, 2},
     {"_fastnetworklib_read_pajek_rcpp", (DL_FUNC) &_fastnetworklib_read_pajek_rcpp, 1},
+    {"_fastnetworklib_decompose_exposure_rcpp", (DL_FUNC) &_fastnetworklib_decompose_exposure_rcpp, 5},
     {NULL, NULL, 0}
 };
 
