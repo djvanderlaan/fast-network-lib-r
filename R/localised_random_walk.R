@@ -7,12 +7,12 @@
 #' @param values numeric vector with vertex values. Should have the same length
 #' as the number of vertices. 
 #' @param weights numeric vector with vertex weights. Should have the same length
-#' as the numver of vertices. 
+#' as the number of vertices. 
 #' @param alpha stopping parameter. Should be between 0 and 1. The lower the
 #' value the smaller the area around the ego vertex.
 #' @param nstep_max the maximum number of iterations. 
 #' @param precision the iterations will stop when all changes in the results are
-#' smaller than the predision. 
+#' smaller than the precision. 
 #' @param nthreads number of threads to use. Values of 0 and 1 mean that the
 #' computation is performed in the main thread. 
 #' @param normalise_weights make sure the weights of the outgoing edges of all
