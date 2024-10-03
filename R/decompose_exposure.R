@@ -50,7 +50,7 @@ decompose_exposure <- function(graph, values, exposure, weights = 1.0,
   # transform 
   nlayers <- length(d)/2
   result <- lapply(seq_len(nlayers), function(l) {
-    data.frame(id = seq_len(nvertices), layer = l, direct = d[[l]], 
+    data.frame(id = vertices(graph), layer = l, direct = d[[l]], 
       indirect = d[[nlayers+l]])
   })
   do.call(rbind, result)
