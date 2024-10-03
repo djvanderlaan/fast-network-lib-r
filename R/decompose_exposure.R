@@ -32,8 +32,9 @@
 #' @import Rcpp
 #' @importFrom Rcpp evalCpp
 #'@export
-decompose_exposure <- function(graph, values, exposure, weights = 1.0, alpha = 0.85) {
-    nvertices = graph_stats(graph)$nvertices
+decompose_exposure <- function(graph, values, exposure, weights = 1.0, 
+    alpha = 0.85) {
+  nvertices = graph_stats(graph)$nvertices
   # check input 
   stopifnot(length(values) == nvertices && is.numeric(exposure))
   stopifnot(!anyNA(values))
@@ -42,7 +43,7 @@ decompose_exposure <- function(graph, values, exposure, weights = 1.0, alpha = 0
   stopifnot(length(weights) == nvertices && is.numeric(exposure))
   stopifnot(!anyNA(weights))
   stopifnot(length(exposure) == nvertices && is.numeric(exposure))
-  stopifnot(!anyNA(exposure))
+  #stopifnot(!anyNA(exposure))
   stopifnot(length(alpha) == 1 && !is.na(alpha) && alpha > 0 && alpha < 1)
   # call fastnetworklib
   d <- decompose_exposure_rcpp(graph, values, exposure, weights, alpha)

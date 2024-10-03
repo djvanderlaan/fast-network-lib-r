@@ -14,7 +14,7 @@ URL: https://github.com/djvanderlaan/fast-network-lib-r
 Depends:
     R (>= 3.6.0)
 Imports:
-    Rcpp,
+    Rcpp
 LinkingTo: Rcpp
 License: GPL-3
 LazyLoad: yes
