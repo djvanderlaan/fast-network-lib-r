@@ -83,6 +83,7 @@ test$exposure <- vert$exposure[match(test$id, vert$id)]
 test$exposure[is.na(test$exposure)] <- 0
 stopifnot(isTRUE(all.equal(test$total, test$exposure, tolerance=1E-5)))
 
+free_graph(g)
 
 
 # ==============================================================================
@@ -163,6 +164,7 @@ test$exposure <- vert$exposure[match(test$id, vert$id)]
 test$exposure[is.na(test$exposure)] <- 0
 stopifnot(isTRUE(all.equal(test$total, test$exposure, tolerance=1E-5)))
 
+free_graph(g)
 
 # ==============================================================================
 # Simple network we can manually check
@@ -205,7 +207,7 @@ target <- data.frame(
 )
 expect_equal(decomp, target, attributes = FALSE)
 
-
+free_graph(g)
 
 
 # ==============================================================================
@@ -250,4 +252,4 @@ target <- data.frame(
 )
 expect_equal(decomp, target, attributes = FALSE)
 
-
+free_graph(g)

@@ -7,8 +7,9 @@
 #'   in \code{vertex_ids}. Should have the same length as \code{src}.
 #' @param weights optional vector with the weights of the edges. When omitted als edges
 #'   get a weight of 1.0. Should have the same length as \code{src} (or \code{NULL}).
-#' @param ordered logical indicating whether or not the edges are ordered (by src). Passing
-#'   \code{TRUE} when the edges are ordered can speed up creation of the graph.
+#' @param layer optional vector with the layer to which each edge belongs. Should
+#'   have the same length as \code{src} (or \code{NULL}) and should contain 
+#'   integer values between 1 and 255. 
 #'
 #' @details
 #' Graphs are always considered to be directed weighted graphs.
@@ -23,28 +24,14 @@
 #' @import Rcpp
 #' @importFrom Rcpp evalCpp
 #' @export
-create_graph <- function(vertex_ids, src, dst, weights = NULL, ordered = FALSE) {
+create_graph <- function(vertex_ids, src, dst, weights = NULL, layer = NULL) {
   stopifnot(!anyDuplicated(vertex_ids))
-  stopifnot(length(src) == length(dst))
-  stopifnot(is.null(weights) || length(weights) == length(src))
-  src <- match(src, vertex_ids) - 1L
-  dst <- match(dst, vertex_ids) - 1L
-  stopifnot(!anyNA(src))
-  stopifnot(!anyNA(dst))
-  stopifnot(is.null(weights) || !anyNA(weights))
-  if (!ordered) {
-    o <- order(src)
-    src <- src[o]
-    dst <- dst[o]
-    if (!is.null(weights)) {
-      weights <- weights[o]
-    }
-  }
-  if (!is.null(weights)) {
-    res <- create_graphw_rcpp(length(vertex_ids), src, dst, weights)
-  } else {
-    res <- create_graph_rcpp(length(vertex_ids), src, dst)
-  }
-  structure(res, class = "graph")
+  # Create empty graph
+  res <- create_graph_rcpp(length(vertex_ids), src = integer(0), 
+    dst = integer(0))
+  # Add edges
+  add_edges(graph = res, vertex_ids = vertex_ids, src = src, dst = dst,
+    weights = weights, layer = layer)
+  structure(res, class = "graph", vertex_ids = vertex_ids)
 }
 
