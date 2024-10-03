@@ -44,7 +44,7 @@ add_edges <- function(graph, vertex_ids, src, dst, weights = NULL, layer = NULL)
     if (!is.null(weights)) weights <- weights[o]
     if (!is.null(layer)) layer <- layer[o]
   }
-  add_edgesl_rcpp(graph, src, dst, weights, layer)
+  add_edges_rcpp(graph, src, dst, weights, layer)
   invisible(graph)
 }
 

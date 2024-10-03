@@ -27,8 +27,7 @@
 create_graph <- function(vertex_ids, src, dst, weights = NULL, layer = NULL) {
   stopifnot(!anyDuplicated(vertex_ids))
   # Create empty graph
-  res <- create_graph_rcpp(length(vertex_ids), src = integer(0), 
-    dst = integer(0))
+  res <- create_graph_rcpp(length(vertex_ids))
   # Add edges
   add_edges(graph = res, vertex_ids = vertex_ids, src = src, dst = dst,
     weights = weights, layer = layer)
