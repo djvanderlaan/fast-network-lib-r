@@ -34,7 +34,7 @@ edges <- edges[order(edges$src, edges$dst), ]
 
 # Create graph object from this
 g <- create_graph(vert$id, src = integer(0), dst = integer(0))
-add_edges(g, vertex_ids = vert$id, src = edges$src, 
+add_edges(g, src = edges$src, 
   dst = edges$dst, weights = edges$weight, layer = edges$layer)
 
 # Calculate exposure
@@ -115,7 +115,7 @@ edges <- edges[order(edges$src, edges$dst), ]
 
 # Create graph object from this
 g <- create_graph(vert$id, src = integer(0), dst = integer(0))
-add_edges(g, vertex_ids = vert$id, src = edges$src, 
+add_edges(g, src = edges$src, 
   dst = edges$dst, weights = edges$weight, layer = edges$layer)
 
 # Calculate exposure
@@ -187,7 +187,7 @@ vertices <- data.frame(
 
 
 g <- create_graph(vertices$id, src = integer(0), dst = integer(0))
-add_edges(g, vertex_ids = vertices$id, src = edges$src, 
+add_edges(g, src = edges$src, 
   dst = edges$dst, weights = edges$weight, layer = edges$layer)
 
 alpha <- 0.6
@@ -231,7 +231,7 @@ vertices <- data.frame(
   )
 
 g <- create_graph(vertices$id, src = integer(0), dst = integer(0))
-add_edges(g, vertex_ids = vertices$id, src = edges$src, 
+add_edges(g, src = edges$src, 
   dst = edges$dst, weights = edges$weight, layer = edges$layer)
 
 

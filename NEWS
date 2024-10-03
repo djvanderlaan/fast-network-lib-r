@@ -10,3 +10,4 @@ NEW FEATURES
   - `create_graph` nog longer had the `sorted` option. It will alway check if
     the edges are in order and if not it will sort the edges.
 
+  - Vertex ids are stored in graph object in the `vertex_ids` attribute.
