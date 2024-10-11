@@ -11,6 +11,8 @@ BUG FIXES
   
   - `generate_poisson` now also returns vertex ids.
 
+  - `src` and `dst` are no longer required arguments of `create_graph`
+
 CHANGES IN VERSION 0.2.0
 
 NEW FEATURES
