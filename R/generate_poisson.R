@@ -24,6 +24,6 @@ generate_poisson <- function(nvertices, mean_degree,
   stopifnot(!is.na(seed))
   stopifnot(seed >= 0 && seed <= .Machine$integer.max)
   graph <- generate_poisson_rcpp(nvertices, mean_degree, seed)
-  structure(graph, class = "graph")
+  structure(graph, class = "graph", vertex_ids = seq_len(nvertices))
 }
 

@@ -1,4 +1,10 @@
 
+CHANGES IN VERSION 0.2.1
+
+BUG FIXES
+  
+  - `generate_poisson` now also returns vertex ids.
+
 CHANGES IN VERSION 0.2.0
 
 NEW FEATURES
