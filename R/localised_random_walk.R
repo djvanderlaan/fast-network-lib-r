@@ -35,8 +35,8 @@
 #' @import Rcpp
 #' @importFrom Rcpp evalCpp
 #' @export
-localised_random_walk <- function(graph, values, weights, alpha = 0.85, nstep_max = 200, 
-    precision = 1E-5, nthreads = 0, normalise_weights = TRUE) {
+localised_random_walk <- function(graph, values, weights = rep(1.0, length(values)), 
+    alpha = 0.85, nstep_max = 200, precision = 1E-5, nthreads = 0, normalise_weights = TRUE) {
   nvertices = graph_stats(graph)$nvertices
   stopifnot(length(values) == nvertices)
   stopifnot(length(weights) == nvertices)
