@@ -5,6 +5,8 @@ NEW FEATURES
 
   - The `weights` argument of `localised_random_walk` is no longer required.
 
+  - `decompose_exposure` can now also be called for a graph without layers.
+
 BUG FIXES
   
   - `generate_poisson` now also returns vertex ids.
