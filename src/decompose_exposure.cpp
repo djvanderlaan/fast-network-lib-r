@@ -21,7 +21,7 @@ std::vector<DoubleVec> decompose_exposure_no_layers(const Graph& graph,
       result[0L][v] += (1-alpha) * (*p_weights) * weights[w] * values[w];
       const double exposure_w = exposure[w];
       if (!std::isnan(exposure_w)) 
-        result[1L][v] += alpha * (*p_weights) * weights[w] * exposure_w;
+        result[1L][v] += alpha * (*p_weights) * exposure_w;
     }
   }
   // normalise the result; the sum of the direct and indirect effects should add
@@ -62,7 +62,7 @@ std::vector<DoubleVec> decompose_exposure(const Graph& graph,
       result[layer-1L][v] += (1-alpha) * (*p_weights) * weights[w] * values[w];
       const double exposure_w = exposure[w];
       if (!std::isnan(exposure_w)) 
-        result[graph.nlayers + layer-1L][v] += alpha * (*p_weights) * weights[w] * exposure_w;
+        result[graph.nlayers + layer-1L][v] += alpha * (*p_weights) * exposure_w;
     }
   }
   // normalise the result; the sum of the direct and indirect effects should add

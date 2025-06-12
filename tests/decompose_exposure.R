@@ -1,5 +1,6 @@
 
 source("helpers.R")
+
 library(fastnetworklib)
 
 
@@ -54,6 +55,7 @@ decomp <- decompose_exposure(g, values = vert$y, exposure = vert$exposure,
 m <- merge(edges, vert, by.x = "dst", by.y = "id", all.x = TRUE)
 m$direct <- (1-alpha)*m$weight.x*m$weight.y*m$y
 m$indirect <- alpha*m$weight.x*m$weight.y*m$exposure
+m$indirect <- alpha*m$weight.x*m$exposure
 m <- aggregate(m[, c("direct", "indirect")], m[, c("src", "layer")], sum, na.rm = TRUE)
 names(m)[1] <- "id" 
 m <- merge(expand.grid(id = vert$id, layer = 1:2), m, 
@@ -134,7 +136,7 @@ decomp <- decompose_exposure(g, values = vert$y, exposure = vert$exposure,
 # Now also calculate decomposition manually
 m <- merge(edges, vert, by.x = "dst", by.y = "id", all.x = TRUE)
 m$direct <- (1-alpha)*m$weight.x*m$weight.y*m$y
-m$indirect <- alpha*m$weight.x*m$weight.y*m$exposure
+m$indirect <- alpha*m$weight.x*m$exposure
 m <- aggregate(m[, c("direct", "indirect")], m[, c("src", "layer")], sum, na.rm = TRUE)
 names(m)[1] <- "id" 
 m <- merge(expand.grid(id = vert$id, layer = 1:2), m, 

@@ -1,4 +1,12 @@
 
+CHANGES IN VERSION 0.2.2
+
+BUG FIXES
+
+  - `decompose_exposure` incorrectly handled weights of vertices resulting in
+    incorrect values for the indirect effects of layers.
+  
+
 CHANGES IN VERSION 0.2.1
 
 NEW FEATURES
@@ -12,6 +20,7 @@ BUG FIXES
   - `generate_poisson` now also returns vertex ids.
 
   - `src` and `dst` are no longer required arguments of `create_graph`
+
 
 CHANGES IN VERSION 0.2.0
 
